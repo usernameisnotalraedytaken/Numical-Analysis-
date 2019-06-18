@@ -5,5 +5,6 @@
 #include "Diff.h"
 #include "Int.h"
 #include "ode.h"
+#include "Solve.h"
 
 #endif
