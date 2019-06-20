@@ -27,4 +27,40 @@ double RK4(double f(double, double), double x, double y, double h)
 	return Yn;
 }
 
+double BackwardEuler(double f(double, double), double x, double y, double h)
+{
+	double x1, x2 = 1, x0 = 0.5;
+	while(x2 > EPS)
+	{
+		double xx = x0;
+		x0 = y + h * f(x + h, x0);
+		x2 = x0 - xx;
+		if(x2 < 0.0)	x2 = 0.0 - x2;
+	}
+	return x0;
+}
+double AB2(double f(double, double), double x0 ,double y0, double x1, double y1, double h)
+{
+	return y1 + h * (3.0 * f(x1, y1) / 2.0 - f(x0, y0) / 2.0);
+}
+double AM2(double f(double, double), double x0 ,double y0, double x1, double y1, double h)
+{
+	double wp = 0.5, xp = x1 + h, x2 = 1;
+	while(x2 > EPS)
+	{
+		double ww = wp;
+		wp = y0 + h / 12.0 * ( 5.0 * f( xp , wp ) + 8.0 * f( x1, y1 ) - f( x0, y0 ));
+		x2 = wp - ww;
+		if(x2 < 0.0) x2 = 0.0 - x2;
+	}
+	return wp;
+}
+double AB3(double f(double, double), double x0 ,double y0, double x1, double y1, double x2, double y2, double h)
+{
+	return y0 + h / 12.0 * ( 23.0 * f(x2, y2) - 16.0 * f(x1, y1) + 5 * f(x0, y0));
+}
+double AB4(double f(double, double), double x0 ,double y0, double x1, double y1, double x2, double y2, double x3, double y3, double h)
+{
+	return y0 + h / 12.0 * ( 55.0 * f(x3, y3) - 59.0 * f(x2, y2) + 37.0 * f(x1, y1) - 9.0 * f(x0, y0));
+}
 #endif

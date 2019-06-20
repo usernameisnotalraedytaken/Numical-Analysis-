@@ -6,5 +6,6 @@
 #include "Int.h"
 #include "ode.h"
 #include "Solve.h"
+#include "Interpolation.h"
 
 #endif

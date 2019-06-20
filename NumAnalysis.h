@@ -11,6 +11,5 @@
 #define FPI_STEP_COUNT 100
 #define ODE_STEP 1e-5
 #define EPS 1e-7
-#define abs(x) x > 0 ? -x : x
 
 #endif
