@@ -55,6 +55,30 @@ double AM2(double f(double, double), double x0 ,double y0, double x1, double y1,
 	}
 	return wp;
 }
+double AM3(double f(double, double), double x0 ,double y0, double x1, double y1, double x2, double y2, double h)
+{
+	double wp = 0.5, xp = x1 + h, x22 = 1;
+	while(x22 > EPS)
+	{
+		double ww = wp;
+		wp = y0 + h / 24.0 * ( 9.0 * f( xp , wp ) + 19.0 * f( x2, y2 ) - 5.0 * f( x1, y1 ) + f( x0, y0 ));
+		x22 = wp - ww;
+		if(x22 < 0.0) x22 = 0.0 - x22;
+	}
+	return wp;
+}
+double AM4(double f(double, double), double x0 ,double y0, double x1, double y1, double x2, double y2, double x3, double y3, double h)
+{
+	double wp = 0.5, xp = x1 + h, x22 = 1;
+	while(x22 > EPS)
+	{
+		double ww = wp;
+		wp = y0 + h / 720.0 * ( 251.0 * f( xp , wp ) + 646.0 * f( x3, y3 ) - 264.0 * f( x2, y2 ) + 106.0 * f( x1, y1 ) - 19.0 * f(x0, y0));
+		x22 = wp - ww;
+		if(x22 < 0.0) x22 = 0.0 - x22;
+	}
+	return wp;
+}
 double AB3(double f(double, double), double x0 ,double y0, double x1, double y1, double x2, double y2, double h)
 {
 	return y0 + h / 12.0 * ( 23.0 * f(x2, y2) - 16.0 * f(x1, y1) + 5 * f(x0, y0));

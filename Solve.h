@@ -108,4 +108,44 @@ double IQI(double f(double), double x0, double x1, double x2)
 	return x3;
 }
 
+double Brent(double f(double), double x0, double x1, double x2)
+{
+	double y = 1;
+	double x;
+	while(y > EPS)
+	{
+		double q = f(x0) / f(x1);
+		double r = f(x2) / f(x1);
+		double s = f(x2) / f(x0);
+		double xIQI = x2 - (r * (r - q) * (x2 - x1) + (1 - r) * s * (x2 - x0)) / ((q - 1) * (r - 1) * (s - 1));
+		double xSEC = x1 - (f(x1) * (x1 - x0)) / (f(x1) - f(x0));
+		double xBIN = (x1 + x2) / 2.0;
+		if(_(f(xIQI)) < _(f(x1)))
+		{
+			x = xIQI;
+		}
+		else if(_(f(xSEC)) > _(f(x1)))
+		{
+			x = xSEC;
+		}
+		else
+		{
+			x = xBIN;
+		}
+		if(f(x) == 0)
+			return x;
+		y = _(f(x));
+		if(f(x) * f(x0) == 0)
+		{
+			x2 = x1;
+			x1 = x;
+		}
+		else
+		{
+			x0 = x1;
+			x1 = x;
+		}
+	}
+	return x;
+}
 #endif

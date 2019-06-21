@@ -7,5 +7,6 @@
 #include "ode.h"
 #include "Solve.h"
 #include "Interpolation.h"
+#include "Matrix.h"
 
 #endif
